@@ -1,6 +1,6 @@
 # Dotfiles
 
-What's this? These are my dotfiles for i3, i3blocks and alacritty!.
+What's this? These are my dotfiles for i3, i3blocks and alacritty.
 
 # How to get this?
 
