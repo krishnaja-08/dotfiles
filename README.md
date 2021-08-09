@@ -13,5 +13,4 @@ Just run-
 - scrot
 - xclip (for screenshots)
 - i3blocks (for the bar on top)
-
-
+- alacritty (for the terminal)
