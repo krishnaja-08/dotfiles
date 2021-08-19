@@ -47,7 +47,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg #2F343F -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" 
+bindsym $mod+d exec --no-startup-id rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "#bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -107,9 +107,9 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
-set $ws2 "2: Discord"
-set $ws3 "3: Browser"
-set $ws4 "4: VSCode"
+set $ws2 "2"
+set $ws3 "3: Discord"
+set $ws4 "4 "
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -150,27 +150,27 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+                bindsym k resize grow height 10 px or 10 ppt
+                bindsym l resize shrink height 10 px or 10 ppt
+                bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+# same bindings, but for the arrow keys
+                bindsym Left resize shrink width 10 px or 10 ppt
+                bindsym Down resize grow height 10 px or 10 ppt
+                bindsym Up resize shrink height 10 px or 10 ppt
+                bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+# back to normal: Enter or Escape or $mod+r
+                bindsym Return mode "default"
+                bindsym Escape mode "default"
+                bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -196,16 +196,16 @@ hide_edge_borders both
 # finds out, if available)
 bar {
         status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
-	position top
-	# Custom colors for i3bar-
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
+                position top
+# Custom colors for i3bar-
+                colors {
+                        background $bg-color
+                                separator #757575
+#                  border             background         text
+                                focused_workspace  $bg-color          $bg-color          $text-color
+                                inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+                                urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+                }
 }
 
 # Custom Keybinds-
@@ -227,21 +227,22 @@ exec_always picom
 # Set Wallpaper -
 exec_always feh --bg-scale ~/wall.png
 
+# Optimus-manager
+exec /usr/bin/prime-offload
+
 # Spotify only in workspace 10-
 assign [class="Spotify"] $ws10
 
-# Discord only in workspace 2-
-assign [class="discord"] $ws2
-
-# Firefox only in workspace 3-
-assign [class="firefox"] $ws3
-
-# VSCode only in workspace 4-
-assign [class="Code"] $ws4
+# Discord only in workspace 3-
+assign [class="discord"] $ws3
 
 # Brightness control
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+# For this to work, add the following to visudo-
+# bl4z3 ALL = NOPASSWD: /usr/bin/xbacklight
+# Use xbacklight or acpilight depending on your system
+bindsym XF86MonBrightnessUp exec sudo xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec sudo xbacklight -dec 5
+
 
 # Screenshot
 # Multi-screen screenshots with scrot
@@ -249,3 +250,7 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 
 # OSX-like area selection screenshots
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/Screenshots && mv $f ~/Pictures/Screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/`ls -1 -t ~/Pictures/Screenshots | head -1`' # Area selection
+
+# ASUS Fan Profile Control
+
+bindsym --release $mod+F5 exec asusctl profile -n
