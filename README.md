@@ -13,7 +13,6 @@ Just run-
 # Requirements-
 - i3 (or i3-gaps)
 - scrot
-- xclip (for screenshots)
 - i3blocks (for the bar on top)
 - alacritty (for the terminal)
 
