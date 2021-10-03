@@ -10,9 +10,6 @@ Just run-
 
     git clone https://github.com/gopal-kaul/dotfiles ~/
     
- # What is this?
-    
-    My configuration files for my desktop 
 
 # Requirements-
 - i3 (or i3-gaps)
