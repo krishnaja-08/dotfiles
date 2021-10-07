@@ -33,6 +33,7 @@ if [[ -f "${PREV_FILE}" ]]; then
   PREV_IN=$(echo "${PREV_CONT}" | head -n 1)
   PREV_OUT=$(echo "${PREV_CONT}" | tail -n 1)
 fi
+.
 
 BANDWIDTH=$(grep "${INSTANCE}" /proc/net/dev | awk -F: '{print  $2}' | awk '{print $1" "$9}')
 
